@@ -32,6 +32,7 @@ interface HsvColorPickerProps {
   onSatValPickerDragEnd: () => void;
   onSatValPickerDragTerminate: () => void;
   onSatValPickerPress: () => void;
+  showHuePicker: Boolean;
 };
 
 export default class HsvColorPicker extends Component<HsvColorPickerProps> {
@@ -70,6 +71,7 @@ export default class HsvColorPicker extends Component<HsvColorPickerProps> {
       onSatValPickerDragEnd,
       onSatValPickerDragTerminate,
       onSatValPickerPress,
+      showHuePicker
     } = this.props;
     return (
       <View style={[styles.container, containerStyle]}>
@@ -88,19 +90,23 @@ export default class HsvColorPicker extends Component<HsvColorPickerProps> {
           onPress={onSatValPickerPress}
           ref={this.satValPicker}
         />
-        <HuePicker
-          containerStyle={huePickerContainerStyle}
-          borderRadius={huePickerBorderRadius}
-          hue={huePickerHue}
-          barWidth={huePickerBarWidth}
-          barHeight={huePickerBarHeight}
-          sliderSize={huePickerSliderSize}
-          onDragStart={onHuePickerDragStart}
-          onDragMove={onHuePickerDragMove}
-          onDragEnd={onHuePickerDragEnd}
-          onDragTerminate={onHuePickerDragTerminate}
-          onPress={onHuePickerPress}
-        />
+        {
+          showHuePicker && (
+            <HuePicker
+              containerStyle={huePickerContainerStyle}
+              borderRadius={huePickerBorderRadius}
+              hue={huePickerHue}
+              barWidth={huePickerBarWidth}
+              barHeight={huePickerBarHeight}
+              sliderSize={huePickerSliderSize}
+              onDragStart={onHuePickerDragStart}
+              onDragMove={onHuePickerDragMove}
+              onDragEnd={onHuePickerDragEnd}
+              onDragTerminate={onHuePickerDragTerminate}
+              onPress={onHuePickerPress}
+            />
+          )
+        }
       </View>
     );
   }
@@ -139,4 +145,5 @@ HsvColorPicker.defaultProps = {
   onSatValPickerDragEnd: null,
   onSatValPickerDragTerminate: null,
   onSatValPickerPress: null,
+  showHuePicker: true
 };
